@@ -1,14 +1,20 @@
 # Use a base image with Java and Tomcat installed
 FROM tomcat:9.0-jdk11
 
-RUN addgroup -g 10014 choreo && \
-    adduser  --disabled-password  --no-create-home --uid 10014 --ingroup choreo choreo
+# Install necessary packages for user and group management
+USER root
+RUN apt-get update && apt-get install -y \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
 
-USER 10014
+# Create a non-root user and group with UID in the specified range
+RUN groupadd -r choreo -g 10014 && \
+    useradd -r -u 10014 -g choreo -m choreo
 
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
+ENV USER choreo
 
 # Copy the .war file into the webapps directory
 COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
@@ -17,7 +23,7 @@ COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
 RUN chown -R choreo:choreo $CATALINA_HOME
 
 # Switch to the non-root user
-USER 10014
+USER choreo
 
 # Expose the port on which Tomcat will run
 EXPOSE 8080
