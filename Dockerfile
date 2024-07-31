@@ -2,10 +2,10 @@
 FROM tomcat:9.0-jdk17
 
 # Create a group with a specific GID
-RUN addgroup -g 10014 choreo
+RUN groupadd -g 10014 choreo
 
 # Create a user with a specific UID and add them to the group
-RUN adduser --disabled-password --no-create-home --uid 10014 --ingroup choreo choreo
+RUN useradd --disabled-password --no-create-home --uid 10014 --ingroup choreo choreo
 
 USER 10014
 
