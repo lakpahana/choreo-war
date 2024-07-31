@@ -1,5 +1,5 @@
 # Use a base image with Java and Tomcat installed
-FROM tomcat:9.0-jdk11
+FROM tomcat:9.0-jdk17
 
 # Create a group with a specific GID
 RUN addgroup -g 10014 choreo
