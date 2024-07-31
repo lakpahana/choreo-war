@@ -1,8 +1,8 @@
 # Use a base image with Java and Tomcat installed
 FROM tomcat:9.0-jdk11
 
-# Create a non-root user and group
-RUN groupadd -r myuser && useradd -r -g myuser myuser
+# Create a non-root user and group with UID in the specified range
+RUN groupadd -r myuser && useradd -r -u 10001 -g myuser myuser
 
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
