@@ -7,8 +7,6 @@ RUN groupadd -g 10014 choreo
 # Create a user with a specific UID and add them to the group
 RUN useradd --no-create-home --uid 10014 -g choreo choreo
 
-USER 10014
-
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -20,7 +18,7 @@ COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
 RUN chown -R choreo:choreo $CATALINA_HOME
 
 # Switch to the non-root user
-USER 10014
+USER choreo
 
 # Expose the port on which Tomcat will run
 EXPOSE 8080
