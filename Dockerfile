@@ -2,10 +2,10 @@
 FROM tomcat:9.0-jdk17
 
 # Create a group with a specific GID
-RUN groupadd -g 10014 choreo
+RUN groupadd -g 10001 choreo
 
 # Create a user with a specific UID and add them to the group
-RUN useradd --no-create-home --uid 10014 -g choreo choreo
+RUN useradd --no-create-home --uid 10001 -g choreo choreo
 
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
