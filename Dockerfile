@@ -11,6 +11,8 @@ RUN adduser \
   --uid 10014 \
   "choreo"
 
+USER 10014
+
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
