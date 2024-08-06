@@ -1,10 +1,15 @@
+# Use a base image with Java and Tomcat installed
 FROM tomcat:9.0-jdk17
 
-# Create a group with a specific GID within the recommended range
-RUN groupadd -g 10010 choreo
-
-# Create a user with a specific UID within the recommended range and add them to the group
-RUN useradd --no-create-home --uid 10011 -g choreo choreo
+# Create a user with a known UID within the range 10000-20000
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "/nonexistent" \
+  --shell "/sbin/nologin" \
+  --no-create-home \
+  --uid 10014 \
+  "choreo"
 
 # Set environment variables
 ENV CATALINA_HOME /usr/local/tomcat
@@ -16,7 +21,7 @@ COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
 # Change ownership of Tomcat files to the new user
 RUN chown -R choreo:choreo $CATALINA_HOME
 
-# Switch to the non-root user
+# Use the created unprivileged user
 USER choreo
 
 # Expose the port on which Tomcat will run
