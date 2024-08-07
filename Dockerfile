@@ -12,7 +12,7 @@ USER 10014
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
 
-RUN chown -R choreouser:choreo /usr/local/tomcat
+# RUN chown -R choreouser:choreo /usr/local/tomcat
 
 
 # Copy the .war file into the webapps directory
