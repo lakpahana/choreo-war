@@ -24,7 +24,7 @@ COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
 RUN chown -R choreo:choreo $CATALINA_HOME
 
 # Use the created unprivileged user
-USER choreo
+USER 10014
 
 # Expose the port on which Tomcat will run
 EXPOSE 8080
