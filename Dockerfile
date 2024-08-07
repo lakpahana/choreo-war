@@ -21,7 +21,7 @@ ENV PATH $CATALINA_HOME/bin:$PATH
 COPY target/oidc-sample-app.war $CATALINA_HOME/webapps/oidc-sample-app.war
 
 # Change ownership of Tomcat files to the new user
-RUN chown -R choreo:choreo $CATALINA_HOME
+
 
 # Use the created unprivileged user
 USER 10014
