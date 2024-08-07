@@ -4,6 +4,8 @@ FROM tomcat:9.0-jdk17
 RUN addgroup -g 10014 choreo && \
     adduser  --disabled-password  --no-create-home --uid 10014 --ingroup choreo choreouser
 
+RUN chown -R choreouser:choreo /usr/local/tomcat
+
 USER 10014
 
 # Set environment variables
